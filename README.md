@@ -10,9 +10,9 @@ Please follow the instructions below and fill in the information requested when 
 
 |               | Information   |
 |:-------------:|:-------------:|
-| Student Name  | name-here     |
-| Student ID    | id-here       |
-| Student Email | email-here    |
+| Student Name  | Joshua Hayes  |
+| Student ID    | 922379312     |
+| Student Email | jhayes10@sfsu.edu|
 
 
 
