@@ -1,0 +1,32 @@
+<div class="container">
+<div class="site-content">
+
+    <form class="mt-5" id="post-form" action="">
+        <h1>Post an Image</h1>
+        <div class="mb-3">
+            <label class="form-label" for="postTitle">Title</label>
+            <input class="form-control" type="text" id="postTitle" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="description">Description</label>
+            <textarea class="form-control" rows="5" cols="4" id="description" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="uploadFile">Add an image</label>
+            <input class="form-control" type="file" accept="image/*" id="uploadFile" required>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-check form-switch">
+                <input class="form-check-input" id="userPolicy" type="checkbox" required>
+                <label class="form-check-label" for="userPolicy">I agree to the <a href="">Acceptable Use
+                    Policy</a></label>
+            </div>
+        </div>
+
+        <input class="btn btn-danger mb-4" type="submit" value="Post">
+    </form>
+</div>
+</div>

@@ -16,6 +16,10 @@ router.get('/register',(req,res,next)=>{
   res.render('register', { title: 'Register'});
 });
 
+router.get('/post',(req,res,next)=>{
+  res.render('postimage',{title: 'Post An Image'})
+})
+
 
 router.get('users', (req,res,next)=>{
   res.render('users');
