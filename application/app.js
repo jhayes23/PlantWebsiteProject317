@@ -10,6 +10,26 @@ const usersRouter = require("./routes/users");
 
 const app = express();
 
+
+// const port = 3000;
+
+// app.listen(port,() => {   //new
+//     console.log(`Listening on localhost:${port}`);
+// })
+
+
+const db = require('./conf/database');
+const {log} = require("debug");
+// db.query("SELECT * FROM users", function(err, results, fields){
+//     if(err){
+//         console.log(err);
+//
+//     }else{
+//         results.forEach(row => console.log(row));
+//     }
+//     db.end();
+// });
+
 app.engine(
   "hbs",
   handlebars({
