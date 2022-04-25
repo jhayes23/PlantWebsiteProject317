@@ -10,8 +10,14 @@
                 <input class="form-control mr-sm-4" type="search" placeholder="Search">
             </label>
             <span class="material-icons search">search</span>
-            <a class="nav-item nav-link" href="/login">Login</a>
-            <a class="nav-item nav-link" href="/register">Register</a>
+
+            {{#if logged}}
+                <a class="nav-item nav-link" href="/users/logout">Log Out</a>
+
+            {{else}}
+                <a class="nav-item nav-link" href="/login">Login</a>
+            {{/if}}
+
                 <a class="nav-item nav-link" href="/post">Post</a>
         </div>
     </div>
