@@ -1,26 +1,27 @@
 <div class="container">
 
 <div class="site-content">
-    <form class="mt-5" id="register-form" onsubmit="" action="">
+    <form class="mt-5" id="register-form" onsubmit="" action="/users/register" method="post"
+    enctype="application/x-www-form-urlencoded">
         <h1>Register</h1>
         <div class="mb-3">
             <label class="form-label" for="username">Username</label>
-            <input type="text" id="username" class="form-control"/>
+            <input name="username" type="text" id="username" class="form-control" required/>
         </div>
 
         <div class="mb-3">
             <label class="form-label" for="email">Email</label>
-            <input type="text" id="email" class="form-control">
+            <input name="email" type="text" id="email" class="form-control" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label" for="password">Password</label>
-            <input type="password" id="password" class="form-control"/>
+            <input name="password" type="password" id="password" class="form-control"/>
         </div>
 
         <div class="mb-3">
             <label class="form-label" for="password-confirm">Confirm Password</label>
-            <input type="password" id="password-confirm" class="form-control"/>
+            <input name="confirm_password" type="password" id="password-confirm" class="form-control" required/>
         </div>
 
 
