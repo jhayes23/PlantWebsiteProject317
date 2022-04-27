@@ -4,6 +4,7 @@ const db = require('../conf/database');
 const {errorPrint, successPrint} = require('../helpers/debug/debugprinters');
 const UserError = require("../helpers/error/UserError");
 const bcrypt = require('bcrypt');
+const {registerValidator,loginValidator} = require('../middleware/validation');
 
 
 /* GET users listing. */
@@ -11,11 +12,18 @@ router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
 
+router.use("/register", registerValidator);
 /* Get form data from register form*/
 router.post('/register', (req, res, next) => {
     let username = req.body.username;
     let email = req.body.email;
     let password = req.body.password;
+
+
+
+    res.json({
+        message: "Valid user"
+    })
 
     //TODO ServerSide Validation not done in video
 
