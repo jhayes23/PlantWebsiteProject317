@@ -38,9 +38,14 @@ router.post('/createPost', uploader.single("uploadFile"), (req, res, next) => {
         .resize(200)
         .toFile(destinationOfThumbnail)
         .then(() => {
-            return PostModel.create(title, description,fileUploaded,destinationOfThumbnail,fk_userId);
+            return PostModel.create(
+                title,
+                description,
+                fileUploaded,
+                destinationOfThumbnail,
+                fk_userId,);
         })
-        .then(([postWasCreated]) => {
+        .then((postWasCreated) => {
             if (postWasCreated) {
                 req.flash('success', "Your post was created successfully");
                 res.redirect('/');
@@ -49,14 +54,15 @@ router.post('/createPost', uploader.single("uploadFile"), (req, res, next) => {
             }
         })
         .catch((err) => {
-        if (err instanceof PostError) {
-            errorPrint(err.getMessage());
-            req.flash('error', err.getMessage());
-            res.status(err.getStatus());
-            res.redirect(err.getRedirectURL());
-        } else {
-            next(err);
-        }
+            if (err instanceof PostError) {
+                errorPrint(err.getMessage());
+                req.flash('error', err.getMessage());
+                res.status(err.getStatus());
+                res.redirect(err.getRedirectURL());
+            } else {
+                next(err);
+            }
+
     })
 })
 
