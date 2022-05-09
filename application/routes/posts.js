@@ -8,10 +8,10 @@ const crypto = require('crypto');
 const PostError = require('../helpers/error/PostError');
 
 const storage = multer.diskStorage({
-    destination: function(req, file, cb){
+    destination: function (req, file, cb) {
         cb(null, "public/images/uploads");
     },
-    filename: function (req,file,cb){
+    filename: function (req, file, cb) {
         let fileExt = file.mimetype.split('/')[1];
         let randomName = crypto.randomBytes(22).toString("hex");
         cb(null, `${randomName}.${fileExt}`);
@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 });
 let uploader = multer({storage: storage});
 
-router.post('/createPost',uploader.single("uploadFile"), (req,res,next) => {
+router.post('/createPost', uploader.single("uploadFile"), (req, res, next) => {
     let fileUploaded = req.file.path;
     let fileAsThumbnail = `thumbnail-${req.file.filename}`;
     let destinationOfThumbnail = req.file.destination + "/" + fileAsThumbnail;
@@ -36,29 +36,63 @@ router.post('/createPost',uploader.single("uploadFile"), (req,res,next) => {
     sharp(fileUploaded)
         .resize(200)
         .toFile(destinationOfThumbnail)
-        .then(()=> {
+        .then(() => {
             let baseSQL = 'INSERT INTO posts (title, description, photopath, thumbnail, createdAt, fk_userid) VALUE (?,?,?,?, now(), ?)';
-            return db.execute(baseSQL,[title,desc,fileUploaded,destinationOfThumbnail,fk_userId ]);
+            return db.execute(baseSQL, [title, desc, fileUploaded, destinationOfThumbnail, fk_userId]);
         })
-        .then(([results,fields]) => {
-            if(results && results.affectedRows){
-                req.flash('success',"Your post was created successfully");
+        .then(([results, fields]) => {
+            if (results && results.affectedRows) {
+                req.flash('success', "Your post was created successfully");
                 res.redirect('/');
-            }else{
+            } else {
                 throw new PostError('Post could not be created!', '/postImage', 200);
             }
         }).catch((err) => {
-            if(err instanceof PostError){
-                errorPrint(err.getMessage());
-                req.flash('error', err.getMessage());
-                res.status(err.getStatus());
-                res.redirect(err.getRedirectURL());
-            }else{
-                next(err);
-            }
+        if (err instanceof PostError) {
+            errorPrint(err.getMessage());
+            req.flash('error', err.getMessage());
+            res.status(err.getStatus());
+            res.redirect(err.getRedirectURL());
+        } else {
+            next(err);
+        }
     })
 })
 
-
+router.get('/search', async (req, res, next) => {
+    try {
+        let searchTerm = req.query.search;
+        if (!searchTerm) {
+            res.send({
+                resultsStatus: "info",
+                message: "No search term given.",
+                results: []
+            });
+        } else {
+            let baseSQL = "SELECT id, title, description, thumbnail, concat_ws('', title, description ) AS haystack \
+            FROM posts \
+            HAVING haystack like ?; ";
+            let sqlReadySearchTerm = "%" + searchTerm + "%";
+            let [results, fields] = await db.execute(baseSQL, [sqlReadySearchTerm]);
+            if (results && results.length) {
+                res.send({
+                    resultsStatus: "info",
+                    message: `${results.length} results found`,
+                    results: results
+                });
+            } else {
+                let [results, fields] = await db.query('SELECT id, title, description, thumbnail, createdAt FROM posts ORDER BY createdAt LIMIT 8', []);
+                res.send({
+                    resultsStatus: "info",
+                    message: "No results were found for your search but here are the 8 most recent posts.",
+                    results: results
+                });
+            }
+        }
+    }
+    catch (err){
+        next(err);
+    }
+});
 
 module.exports = router;

@@ -7,9 +7,10 @@
 
         <div class="navbar-nav">
             <label>
-                <input class="form-control mr-sm-4" type="search" placeholder="Search">
+                <input class="form-control mr-sm-4" id="search-text" type="search" placeholder="Search">
             </label>
-            <span class="material-icons search">search</span>
+
+            <span class="material-icons search" id="search-button">search</span>
 
             {{#if logged}}
                 <a id="logout-button" class="nav-item nav-link">Log Out</a>

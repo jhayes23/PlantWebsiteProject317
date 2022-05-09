@@ -87,6 +87,7 @@ h1 {
     left: 50%;
     top: 25%;
     transform: translate(-50%,0);
+    z-index: 9000;
 }
 
 #flash-message > div{
