@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const PostModel = require('../models/Posts');
-const db = require('../conf/database');
 const {errorPrint, successPrint} = require('../helpers/debug/debugprinters');
 const sharp = require('sharp');
 const multer = require('multer');
@@ -71,26 +70,19 @@ router.get('/search', async (req, res, next) => {
         let searchTerm = req.query.search;
         if (!searchTerm) {
             res.send({
-                resultsStatus: "info",
                 message: "No search term given.",
                 results: []
             });
         } else {
-            let baseSQL = "SELECT id, title, description, thumbnail, concat_ws('', title, description ) AS haystack \
-            FROM posts \
-            HAVING haystack like ?; ";
-            let sqlReadySearchTerm = "%" + searchTerm + "%";
-            let [results, fields] = await db.execute(baseSQL, [sqlReadySearchTerm]);
-            if (results && results.length) {
+            let results = await PostModel.search(searchTerm);
+            if (results.length) {
                 res.send({
-                    resultsStatus: "info",
                     message: `${results.length} results found`,
                     results: results
                 });
             } else {
-                let [results, fields] = await db.query('SELECT id, title, description, thumbnail, createdAt FROM posts ORDER BY createdAt LIMIT 8', []);
+                let results = await PostModel.getNRecentPosts(8);
                 res.send({
-                    resultsStatus: "info",
                     message: "No results were found for your search but here are the 8 most recent posts.",
                     results: results
                 });
