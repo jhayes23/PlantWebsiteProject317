@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const PostModel = require('../models/Posts');
 const db = require('../conf/database');
 const {errorPrint, successPrint} = require('../helpers/debug/debugprinters');
 const sharp = require('sharp');
@@ -24,7 +25,7 @@ router.post('/createPost', uploader.single("uploadFile"), (req, res, next) => {
     let fileAsThumbnail = `thumbnail-${req.file.filename}`;
     let destinationOfThumbnail = req.file.destination + "/" + fileAsThumbnail;
     let title = req.body.title;
-    let desc = req.body.desc;
+    let description = req.body.desc;
     let fk_userId = req.session.userId;
 
     /**
@@ -37,17 +38,17 @@ router.post('/createPost', uploader.single("uploadFile"), (req, res, next) => {
         .resize(200)
         .toFile(destinationOfThumbnail)
         .then(() => {
-            let baseSQL = 'INSERT INTO posts (title, description, photopath, thumbnail, createdAt, fk_userid) VALUE (?,?,?,?, now(), ?)';
-            return db.execute(baseSQL, [title, desc, fileUploaded, destinationOfThumbnail, fk_userId]);
+            return PostModel.create(title, description,fileUploaded,destinationOfThumbnail,fk_userId);
         })
-        .then(([results, fields]) => {
-            if (results && results.affectedRows) {
+        .then(([postWasCreated]) => {
+            if (postWasCreated) {
                 req.flash('success', "Your post was created successfully");
                 res.redirect('/');
             } else {
                 throw new PostError('Post could not be created!', '/postImage', 200);
             }
-        }).catch((err) => {
+        })
+        .catch((err) => {
         if (err instanceof PostError) {
             errorPrint(err.getMessage());
             req.flash('error', err.getMessage());
