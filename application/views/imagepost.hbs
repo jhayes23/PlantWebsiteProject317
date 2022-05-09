@@ -1,0 +1,24 @@
+<div class="post-container">
+    <div id="author-and-title">
+        <section>
+            <h2 id="title">Post Title: Hello</h2>
+        </section>
+        <section>
+            <h2 id="author">Author: {{currentPost.photopath}}</h2>
+        </section>
+    </div>
+    <section id="created-at">
+        <img src="/{{currentPost.photopath}}" alt="beluga-cat">
+
+        <h3>Created: {{currentPost.createdAt}}</h3>
+    </section>
+    <section id="image">
+        <h3>Image:</h3>
+
+    </section>
+    <section id="post-description">
+        <h3>
+            Description: {{currentPost.description}}
+        </h3>
+    </section>
+</div>

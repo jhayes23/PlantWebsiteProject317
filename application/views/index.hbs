@@ -1,5 +1,7 @@
 <div class="index-container">
 
-    <p>Hello {{ name }},Welcome to {{title}}</p>
+    {{#each results}}
+        {{> card this}}
+    {{/each}}
 
 </div>
