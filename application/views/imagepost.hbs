@@ -1,24 +1,81 @@
-<div class="post-container">
-    <div id="author-and-title">
-        <section>
-            <h2 id="title">Post Title: Hello</h2>
-        </section>
-        <section>
-            <h2 id="author">Author: {{currentPost.username}}</h2>
-        </section>
+<div class="main-content" id="post-container">
+    <div id="photo-container">
+        <h2 id="title"> {{currentPost.title}}</h2>
+        <div id="post-info">
+            <p id="author">Posted By: {{currentPost.username}}</p>
+            <p>Created: </p>
+            <p id="post-date">{{currentPost.createdAt}}</p>
+        </div>
+
+        <img class="img-fluid" id="post-img" src="/{{currentPost.photopath}}" alt="Missing Image">
+        <div id="post-description">
+
+            <p id="post-description">Description: {{currentPost.description}}</p>
+        </div>
+
+
     </div>
-    <section id="created-at">
-        <img src="/{{currentPost.photopath}}" alt="beluga-cat">
-
-        <h3>Created: {{currentPost.createdAt}}</h3>
-    </section>
-    <section id="image">
-        <h3>Image:</h3>
-
-    </section>
-    <section id="post-description">
-        <h3>
-            Description: {{currentPost.description}}
-        </h3>
-    </section>
+    <div id="comment-area">
+        <div id="messages">
+            {{#each currentPost.comments}}
+                {{> comment this}}
+            {{/each}}
+        </div>
+        <div id="comments-box">
+            <textarea name="comments-box-text" id="comments-box-text" placeholder="Leave a Comment"></textarea>
+            <span class="material-symbols-outlined" id="comment-button">comment</span>
+        </div>
+    </div>
 </div>
+
+<script>
+    let posted = document.getElementById('post-date');
+    posted.textContent = new Date(posted.textContent).toLocaleString();
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('span[class=date-posted]').forEach((postedDate) => {
+            postedDate.textContent = new Date(postedDate.textContent).toLocaleString();
+        });
+    });
+
+    function addMessage(data) {
+        let template = document.createElement('template');
+        template.innerHTML =
+                `<div id="message-${data.postId}">
+                <strong class="author-text">${data.username}</strong>
+            <span class="date-posted">${new Date().toLocaleString()}</span>
+        <div class="comment-text">${data.comment}</div>
+    </div>`;
+    document.getElementById('messages').firstChild.before(template.content.firstChild);
+    }
+
+    document.getElementById('comment-button').onclick = (event) => {
+        let commentText = document.getElementById('comments-box-text').value;
+        let postId = document.location.pathname.match(/\d+/g).map(Number)[0];
+        if (!commentText) {
+            return;
+        }
+        let fetchOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type":"Application/json"
+            },
+            body: JSON.stringify({
+                comment: commentText,
+                postId: postId
+            })
+        }
+        fetch('/comments/create', fetchOptions)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.code === 1) {
+                        addMessage(data);
+                        document.getElementById('comments-box-text').value = "";
+
+                    } else {
+                        addFlashFromFrontEnd(data.message, data.status);
+
+                    }
+                })
+                .catch(err => console.log(err));
+    }
+</script>

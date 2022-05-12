@@ -30,7 +30,7 @@ function addFlashFromFrontEnd(message){
     setFlashMessageFadeOut(flashMessageDiv);
 }
 function createCard(postData){
-    return `<div id="${postData.id}">
+    return `<div class="card" id="post-${postData.id}">
     <img class="card-image" src="${postData.thumbnail}" alt="">
     <div class="card-body">
         <p class="card-title">${postData.title}</p>
@@ -45,7 +45,7 @@ function executeSearch(){
         location.replace('/');
         return;
     }
-    let mainContent = document.getElementById('main-content');
+    let mainContent = document.getElementsByClassName('main-content')[0];
     let searchURL = `/posts/search?search=${searchTerm}`;
     fetch(searchURL)
         .then((data) => {

@@ -1,49 +1,46 @@
-body {
-    background: black;
-    width: 100%;
-    height: 80vh;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    /*background: linear-gradient(*/
-    /*        rgba(246, 247, 249, 0.8),*/
-    /*        rgba(246, 247, 249, 0.8));*/
 
+body {
+    background: url("../5619919.jpg"),no-repeat;
+    background-size: cover;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: white;
 }
 .container{
-    background: black url('../sonic-the-hedgehog-background-full-hd-1080p-52006.jpg') no-repeat;
-    background-size: cover;
-    height: 80vh;
-    place-content: stretch;
+    display: grid;
+    height: 90vh;
+    margin: auto;
+    grid-template-rows: 1fr .5fr 5fr .3fr;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-areas:
+            "banner banner banner banner"
+            "nav nav nav nav"
+            "content content content content"
+            "footer footer footer footer";
+
 }
 
 a {
-    color: #00B7FF;
+    color: #003e54;
     font-size: 16px;
     /*float:right;*/
 }
 
-h1 {
-    text-align: center;
-    font-size: 40px;
 
-}
 
 #nav-bar {
-    margin: 8px 15px 0 15px;
+    grid-area: nav ;
+    margin: 8px 0 0 0;
     /*padding: 15px 10px 0 5px;*/
-    background: linear-gradient(to right,
-    rgba(43, 97, 211, 0.75),
-    rgba(171, 9, 152, 0.95));
-    color: wheat;
+    background: linear-gradient(15deg, #8312A5 0%, #0037A5 100%);
+    border: solid black;
     border-radius: 5px;
 }
 
 #login-form, #register-form,#post-form {
-
-    background: linear-gradient(
-            rgba(35, 43, 85, 0.75),
-            rgba(35, 43, 85, 0.95));
-    color: wheat;
-    border: solid black;
+    margin: auto;
+    background: slategray;
+    border: solid white;
+    color: #003e54;
     border-radius: 5px;
     box-shadow: 2px 2px 4px black;
     width: 450px;
@@ -53,33 +50,66 @@ h1 {
     padding-right: 37px;
     padding-top: 35px;
 }
-.banner{
-    background: powderblue;
+#banner{
+    color: white;
+    grid-area: banner ;
+    font-size: 320px;
     opacity: 70%;
-    margin-top: 5px;
+    margin: auto;
 }
+#site-content{
+    grid-area: content;
+}
+.card{
+    background: lightcyan;
+    border: 1px solid white;
+    /*padding: 30px;*/
+    /*margin: auto;*/
+}
+.card-image{
+    margin: auto;
+}
+.card-title{
 
-.site-content{
-    margin        : 0;
-    padding       : 0;
-    display       : grid;
-    place-content : center;
+}
+.card-text{
+
+}
+.card-body{
+    background: cadetblue;
+    color: white;
+    max-height: 30%;
 }
 
 #footer{
-    opacity: 70%;
-    background: powderblue;
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
+    grid-area: footer;
+    opacity: 75%;
+    color: white;
+    background: black;
+    margin-top: 5px;
+    /*background: linear-gradient(15deg, #8312A5 0%, #0037A5 100%);*/
     padding-top: 15px;
     text-align: center;
 }
+#index-container{
+    grid-area: content;
+    display: grid;
+    margin-top: 5px;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    grid-auto-columns: 1fr 1fr 1fr 1fr;
+    gap: .25rem;
+}
+
 
 .search{
     padding-top: 10px;
     padding-left: 5px;
     color: white;
+}
+#search-button:hover{
+    cursor: pointer;
 }
 
 #flash-message{
@@ -92,4 +122,136 @@ h1 {
 
 #flash-message > div{
     text-align: center;
+}
+
+#post-container{
+    grid-area: content;
+    padding-top: .35rem;
+    padding-bottom: .35rem;
+    margin-bottom: 5px;
+    display: grid;
+    grid-gap: .2rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "photoinfo comments";
+
+
+}
+#post-info{
+    border: 1px solid white;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#photo-container{
+    display: flex;
+    border: 1px solid white;
+    flex-direction: column;
+    justify-self: center;
+    flex-wrap: nowrap;
+    grid-area: photoinfo;
+    color: ghostwhite;
+    height: 80vh;
+}
+
+#post-info{
+    display: inline-block;
+    vertical-align: middle;
+}
+#post-img{
+    border: 1px solid white;
+    max-width: 66%;
+    max-height: 90%;
+}
+#post-description{
+}
+
+
+#comment-area{
+    display: grid;
+    justify-self: stretch;
+    grid-area: comments;
+    grid-template-rows: 2fr 75px;
+    /*grid-template-columns: 1fr;*/
+    gap: .2rem;
+    grid-template-areas:
+    "messages"
+    "comments-box";
+    margin-right: 15px;
+}
+#comment-button{
+    padding: .25rem;
+    margin: .25rem;
+    line-height: 2;
+    border: .0625rem solid white;
+    border-radius: .35rem;
+    cursor: pointer;
+}
+
+#comment-button:hover{
+    background-color: #5eac74;
+}
+
+#comments-box-text{
+    flex-grow: 1;
+    padding: .25rem;
+    margin: .25rem;
+    border: .0625rem solid white;
+    border-radius: .35rem;
+    resize: none;
+}
+
+div[post-container] > div[id^=post-]{
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+
+div[post-container] > img[id^=post-]{
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+div[id^=message-]{
+    display: grid;
+    grid-template-rows: .3fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: .2em;
+    padding: .5rem;
+    margin: .25rem;
+    font-size: 1rem;
+    grid-template-areas: "author created"
+                        "comment comment";
+}
+.author-text{
+    grid-area: author;
+    color: red;
+}
+.date-posted{
+    grid-area: created;
+    text-align: end;
+    justify-self: end;
+}
+.comment-text{
+    grid-area: comment;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 50px;
+    min-height: 50px;
+}
+#comments-box{
+    padding: .2rem;
+    display: flex;
+    grid-area: comments-box;
+    border-radius: .35rem;
+    border: 1px solid white;
+}
+#messages{
+    grid-area: messages;
+    overflow-y: auto;
+    display: flex;
+    flex-flow: column-reverse nowrap;
+    box-shadow: -2px 2px 4px 4px grey;
+    border-radius: .35rem;
+    scroll-behavior: smooth;
+
 }

@@ -18,7 +18,7 @@ CommentsModel.getCommentsForPost = (postId) => {
     let baseSql = `SELECT u.username, c.comment, c.createdAt, c.id
     FROM comments c
     JOIN users u
-    on u.d = c.fk_authorId
+    on u.id = c.fk_authorId
     WHERE c.fk_postId=?
     ORDER BY c.createdAt DESC`;
     return db.query(baseSql,[postId])
