@@ -46,6 +46,7 @@ function executeSearch(){
         return;
     }
     let mainContent = document.getElementsByClassName('main-content')[0];
+
     let searchURL = `/posts/search?search=${searchTerm}`;
     fetch(searchURL)
         .then((data) => {
@@ -56,6 +57,9 @@ function executeSearch(){
             data_json.results.forEach((row) => {
                 newMainContentHTML += createCard(row);
             });
+            if(document.getElementById('form-page-container')){
+                document.getElementById('form-page-container').id = "index-container";
+            }
             mainContent.innerHTML = newMainContentHTML;
             if(data_json.message){
                 addFlashFromFrontEnd(data_json.message);
