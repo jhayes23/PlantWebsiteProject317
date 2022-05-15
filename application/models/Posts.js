@@ -18,9 +18,9 @@ PostModel.create = (title, description, photoPath, thumbnail,
 }
 
 PostModel.search = (searchTerm) => {
-    let baseSQL = "SELECT id, title, description, thumbnail, concat_ws('', title, description ) AS haystack \
+    let baseSQL = "SELECT id, title, description, thumbnail, concat_ws(' ', title, description ) AS haystack \
             FROM posts \
-            HAVING haystack like ?; ";
+            HAVING haystack like ?;";
     let sqlReadySearchTerm = "%" + searchTerm + "%";
     return db.execute(baseSQL, [sqlReadySearchTerm])
         .then(([results, fields]) => {

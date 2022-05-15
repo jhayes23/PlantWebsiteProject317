@@ -50,7 +50,7 @@ router.post('/createPost', uploader.single("uploadFile"), (req, res, next) => {
         })
         .then((postWasCreated) => {
             if (postWasCreated) {
-                // req.flash('success', "Your post was created successfully");
+                req.flash('success', "Your post was created successfully");
                 res.redirect('/');
             } else {
                 throw new PostError('Post could not be created!', '/postImage', 200);

@@ -34,7 +34,7 @@ function createCard(postData){
     <div class="card-body">
         <p class="card-title">${postData.title}</p>
         <p class="card-text">${postData.description}</p>
-        <a href="post/${postData.id}" class="anchor-buttons">Post Details</a>
+        <a href="/post/${postData.id}" class="anchor-buttons">Post Details</a>
     </div>
 </div>`
 }
@@ -53,12 +53,16 @@ function executeSearch(){
         })
         .then((data_json) =>{
             let newMainContentHTML = '';
+            if(document.getElementById('form-page-container')){
+                document.getElementById('form-page-container').id = "index-container";
+            }else if(document.getElementById('post-container')){
+                document.getElementById('post-container').id = "index-container";
+
+            }
             data_json.results.forEach((row) => {
                 newMainContentHTML += createCard(row);
             });
-            if(document.getElementById('form-page-container')){
-                document.getElementById('form-page-container').id = "index-container";
-            }
+
             mainContent.innerHTML = newMainContentHTML;
             if(data_json.message){
                 addFlashFromFrontEnd(data_json.message);
