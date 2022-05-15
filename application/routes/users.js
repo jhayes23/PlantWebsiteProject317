@@ -18,9 +18,6 @@ router.post('/register', (req, res, next) => {
     let email = req.body.email;
     let password = req.body.password;
 
-
-    //TODO ServerSide Validation not done in video
-
     UserModel.usernameExists(username)
         .then((userDoesNameExist) => {
             if (userDoesNameExist) {
@@ -53,7 +50,7 @@ router.post('/register', (req, res, next) => {
                 );
             } else {
                 successPrint("User was created!")
-                            req.flash('success','User account has been created!')
+                            req.flash('success','Account has been created!')
                             res.redirect('/login');
             }
         })
@@ -69,13 +66,12 @@ router.post('/register', (req, res, next) => {
             }
         });
 })
-
+router.use("/login", loginValidator);
 /* Get form data from login form*/
 router.post('/login', (req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
 
-    //TODO ServerSide Validation not done in video
 
     UserModel.authenticate(username,password)
         .then((loggedUserId) => {

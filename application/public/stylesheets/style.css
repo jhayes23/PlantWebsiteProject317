@@ -1,13 +1,14 @@
 
 body {
-    background: url("../5619919.jpg"),no-repeat;
-    background-size: cover;
+    /*background: url("../5619919.jpg"),no-repeat;*/
+    /*background-size: cover;*/
+    background-color: #8312A5;
     font-family: 'Source Sans Pro', sans-serif;
     color: white;
 }
 .container{
     display: grid;
-    height: 90vh;
+    height: 100vh;
     margin: auto;
     grid-template-rows: 1fr .5fr 5fr .3fr;
     grid-template-columns: repeat(4,1fr);
@@ -30,14 +31,14 @@ a {
 #nav-bar {
     grid-area: nav ;
     margin: 8px 0 0 0;
-    /*padding: 15px 10px 0 5px;*/
+    padding: 10px 15px 10px 15px;
     background: linear-gradient(15deg, #8312A5 0%, #0037A5 100%);
     border: solid black;
     border-radius: 5px;
 }
 
 #login-form, #register-form,#post-form {
-    margin: auto;
+    margin: 10px auto 10px auto;
     background: slategray;
     border: solid white;
     color: #003e54;
@@ -50,8 +51,12 @@ a {
     padding-right: 37px;
     padding-top: 35px;
 }
+form > h1{
+    text-align: center;
+}
+
 #banner{
-    color: white;
+    color: gold;
     grid-area: banner ;
     font-size: 320px;
     opacity: 70%;
@@ -113,7 +118,7 @@ a {
     padding-left: 5px;
     color: white;
 }
-#search-button:hover{
+#search-button:hover, #logout-button:hover{
     cursor: pointer;
 }
 
@@ -188,7 +193,7 @@ a {
     "comments-box";
     margin-right: 15px;
 }
-#comment-button{
+#comment-button, #disabled-text-comment-button{
     padding: .25rem;
     margin: .25rem;
     line-height: 2;
@@ -201,7 +206,7 @@ a {
     background-color: #5eac74;
 }
 
-#comments-box-text{
+#comments-box-text, #disabled-text-comments-box{
     flex-grow: 1;
     padding: .25rem;
     margin: .25rem;
@@ -210,6 +215,9 @@ a {
     resize: none;
 }
 
+#disabled-text-comments-box{
+    background-color: white;
+}
 div[post-container] > div[id^=post-]{
     flex-grow: 0;
     flex-shrink: 1;
@@ -247,12 +255,15 @@ div[id^=message-]{
     max-height: 50px;
     min-height: 50px;
 }
-#comments-box{
+#comments-box, #disabled-comments-box{
     padding: .2rem;
     display: flex;
     grid-area: comments-box;
     border-radius: .35rem;
     border: 1px solid white;
+}
+#disabled-comments-box{
+    color: white
 }
 #messages{
     grid-area: messages;

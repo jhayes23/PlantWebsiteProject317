@@ -21,10 +21,19 @@
                 {{> comment this}}
             {{/each}}
         </div>
-        <div id="comments-box">
-            <textarea name="comments-box-text" id="comments-box-text" placeholder="Leave a Comment"></textarea>
-            <span class="material-symbols-outlined" id="comment-button">comment</span>
-        </div>
+        {{#if logged}}
+            <div id="comments-box">
+                <textarea name="comments-box-text" id="comments-box-text" placeholder="Leave a Comment"></textarea>
+                <span class="material-symbols-outlined" id="comment-button">comment</span>
+            </div>
+
+        {{else}}
+            <div id="disabled-comments-box">
+                <textarea disabled name="disabled-text-comments-box" id="disabled-text-comments-box" placeholder="Login to Leave a Comment!"></textarea>
+                <span class="material-symbols-outlined" id="disabled-text-comment-button">comment</span>
+            </div>
+        {{/if}}
+
     </div>
 </div>
 
@@ -36,6 +45,7 @@
             postedDate.textContent = new Date(postedDate.textContent).toLocaleString();
         });
     });
+
 
     function addMessage(data) {
         let template = document.createElement('template');
@@ -78,4 +88,5 @@
                 })
                 .catch(err => console.log(err));
     }
+
 </script>

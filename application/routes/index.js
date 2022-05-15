@@ -18,12 +18,12 @@ router.get('/login', (req, res, next) => {
 router.get('/register', (req, res, next) => {
     res.render('register', {title: 'Register'});
 });
+router.get('/post/:id(\\d+)',getPostById,getCommentsByPostId, (req, res, next) => {
+    res.render('imagepost', {title: `Post ${req.params.id}`});
+});
 router.use('/post', isLoggedIn);
 router.get('/post', (req, res, next) => {
     res.render('postimage', {title: 'Post An Image'})
-});
-router.get('/post/:id(\\d+)',getPostById,getCommentsByPostId, (req, res, next) => {
-    res.render('imagepost', {title: `Post ${req.params.id}`});
 });
 
 

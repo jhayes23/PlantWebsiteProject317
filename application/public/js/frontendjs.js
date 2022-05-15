@@ -2,7 +2,6 @@ function setFlashMessageFadeOut(flashMessageElement) {
     setTimeout(() => {
         let opacity = 1.0;
         let timer = setInterval(()=>{
-            //TODO Edit Flash messages interval.
             if(opacity <0.05){
                 clearInterval(timer);
                 flashMessageElement.remove();

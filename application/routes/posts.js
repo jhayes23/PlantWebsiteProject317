@@ -26,12 +26,16 @@ router.post('/createPost', uploader.single("uploadFile"), (req, res, next) => {
     let title = req.body.title;
     let description = req.body.desc;
     let fk_userId = req.session.userId;
+    let allowedExtensions =
+        /(\.jpg|\.jpeg|\.png|\.gif)$/;
 
-    /**
-     * //TODO server validation
-     * Make sure foreign key, title , and description are not empty.. need defined parameters for insert statement
-     * BIND parameters cannot be undefined . CREATE POST 5min mark
-     */
+
+    if(title === "" || description === ""){
+        req.flash('error', "Please enter valid title and description.");
+        req.session.save(err => {
+            res.redirect("/post");
+        })
+    }
 
     sharp(fileUploaded)
         .resize(200)
@@ -46,7 +50,7 @@ router.post('/createPost', uploader.single("uploadFile"), (req, res, next) => {
         })
         .then((postWasCreated) => {
             if (postWasCreated) {
-                req.flash('success', "Your post was created successfully");
+                // req.flash('success', "Your post was created successfully");
                 res.redirect('/');
             } else {
                 throw new PostError('Post could not be created!', '/postImage', 200);
