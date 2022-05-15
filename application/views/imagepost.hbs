@@ -3,8 +3,7 @@
         <h2 id="title"> {{currentPost.title}}</h2>
         <div id="post-info">
             <p id="author">Posted By: {{currentPost.username}}</p>
-            <p>Created: </p>
-            <p id="post-date">{{currentPost.createdAt}}</p>
+            <p>Created: <span id="post-date">{{currentPost.createdAt}} </span></p>
         </div>
 
         <img class="img-fluid" id="post-img" src="/{{currentPost.photopath}}" alt="Missing Image">

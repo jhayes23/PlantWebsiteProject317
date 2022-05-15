@@ -66,7 +66,7 @@ router.post('/register', (req, res, next) => {
             }
         });
 })
-router.use("/login", loginValidator);
+// router.use("/login", loginValidator);
 /* Get form data from login form*/
 router.post('/login', (req, res, next) => {
     let username = req.body.username;
@@ -89,16 +89,16 @@ router.post('/login', (req, res, next) => {
             }
         })
         .catch((err) => {
-            errorPrint("User login failed");
+            errorPrint("User Login Failed");
             if (err instanceof UserError) {
                 errorPrint(err.getMessage());
-                req.flash('error', err.getMessage());
+                req.flash("error", err.getMessage());
                 res.status(err.getStatus());
-                res.redirect('/login');
+                res.redirect("/login");
             } else {
                 next(err);
             }
-        })
+        });
 })
 
 /* Logout*/
