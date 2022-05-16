@@ -1,16 +1,15 @@
 
 body {
-    /*background: url("../5619919.jpg"),no-repeat;*/
-    /*background-size: cover;*/
-    background-color: #8312A5;
+    background: url("../product-backdrop-empty-wooden-table-with-concrete-wall-plant-shadow.jpg"),no-repeat;
+    background-size: cover;
     font-family: 'Source Sans Pro', sans-serif;
-    color: white;
+    height: 100vh;
 }
 .container{
     display: grid;
     height: 100vh;
     margin: auto;
-    grid-template-rows: 1fr .5fr 5fr .3fr;
+    grid-template-rows: 1fr .5fr 5fr .2fr;
     grid-template-columns: repeat(4,1fr);
     grid-template-areas:
             "banner banner banner banner"
@@ -32,7 +31,8 @@ a {
     grid-area: nav ;
     margin: 8px 0 0 0;
     padding: 10px 15px 10px 15px;
-    background: linear-gradient(15deg, #8312A5 0%, #0037A5 100%);
+    /*background: linear-gradient(90deg, rgba(10,79,0,1) 0%, rgba(1,141,15,1) 66%, rgba(0,194,45,1) 100%);*/
+    background: linear-gradient(0deg, rgba(170,108,0,1) 21%, rgba(115,253,45,1) 100%);
     border: solid black;
     border-radius: 5px;
 }
@@ -51,16 +51,31 @@ a {
     padding-right: 37px;
     padding-top: 35px;
 }
+#register-form,#post-form{
+    max-height: 600px;
+}
+#login-form{
+    max-height: 450px;
+
+}
+#togglePassword{
+    padding-left: 5px;
+    padding-right: 5px;
+}
 form > h1{
     text-align: center;
 }
 
 #banner{
-    color: gold;
     grid-area: banner ;
-    font-size: 320px;
     opacity: 70%;
     margin: auto;
+    min-height: 135px;
+    padding-top: 30px;
+}
+#banner>h1{
+    color: #64e80b;
+    font-size: 4rem;
 }
 
 .card{
@@ -88,11 +103,10 @@ form > h1{
 
 #footer{
     grid-area: footer;
-    opacity: 75%;
+    opacity: 65%;
     color: white;
     background: black;
     margin-top: 5px;
-    /*background: linear-gradient(15deg, #8312A5 0%, #0037A5 100%);*/
     padding-top: 15px;
     text-align: center;
 }
@@ -160,8 +174,6 @@ form > h1{
     justify-self: center;
     flex-wrap: nowrap;
     grid-area: photoinfo;
-    color: ghostwhite;
-    height: 80vh;
 }
 
 #post-info{
