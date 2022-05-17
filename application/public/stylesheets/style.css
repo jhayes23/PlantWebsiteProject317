@@ -1,4 +1,3 @@
-
 body {
     background: url("../product-backdrop-empty-wooden-table-with-concrete-wall-plant-shadow.jpg"),no-repeat;
     background-size: cover;
@@ -16,7 +15,6 @@ body {
             "nav nav nav nav"
             "content content content content"
             "footer footer footer footer";
-
 }
 
 a {
@@ -50,13 +48,16 @@ a {
     padding-right: 37px;
     padding-top: 35px;
 }
+
 #register-form,#post-form{
     max-height: 600px;
 }
+
 #login-form{
     max-height: 450px;
 
 }
+
 #togglePassword{
     padding-left: 5px;
     padding-right: 5px;
@@ -73,6 +74,7 @@ form > h1{
     max-height: 135px;
     padding-top: 30px;
 }
+
 #banner>h1{
     color: #64e80b;
     font-size: 4rem;
@@ -84,6 +86,7 @@ form > h1{
     background: transparent;
     border: 1px solid black;
 }
+
 .card-image{
     max-height: 250px;
     margin: auto;
@@ -95,6 +98,7 @@ form > h1{
     height: 100%;
     overflow: hidden;
 }
+
 .card-body{
     display: grid;
     grid-template-rows: 30px 80px 15px;
@@ -114,6 +118,7 @@ form > h1{
     padding-top: 15px;
     text-align: center;
 }
+
 #index-container{
     grid-area: content;
     display: grid;
@@ -134,11 +139,13 @@ form > h1{
 #search-text{
     min-width: 350px;
 }
+
 .search{
     padding-top: 10px;
     padding-left: 5px;
     color: white;
 }
+
 #search-button:hover, #logout-button:hover{
     cursor: pointer;
 }
@@ -174,33 +181,35 @@ form > h1{
     grid-template-rows: .5fr .5fr .1fr 2fr;
     grid-template-areas: "title" "post-info" "post-img" "post-desc ";
     max-height: 675px;
-    /*max-width: 50% ;*/
     max-width: 545px ;
     flex-direction: column;
     justify-self: center;
     flex-wrap: nowrap;
     grid-area: photoinfo;
+    border: .0625rem solid white;
+    border-radius: .35rem;
 }
+
 #title{
     grid-area: title;
 }
+
 #post-info{
     max-width: 545px ;
     grid-area: post-info;
 
 }
+
 #post-img{
     grid-area: post-img;
     margin: auto;
     max-height: 415px;
 }
+
 #post-description{
     grid-area: post-desc;
     margin-top: 10px;
     max-width: 545px ;
-    /*max-height: inherit;*/
-
-
 }
 
 .form-container{
@@ -213,13 +222,13 @@ form > h1{
     justify-self: stretch;
     grid-area: comments;
     grid-template-rows: 2fr 75px;
-    /*grid-template-columns: 1fr;*/
     gap: .2rem;
     grid-template-areas:
     "messages"
     "comments-box";
     margin-right: 15px;
 }
+
 #comment-button, #disabled-text-comment-button{
     padding: .25rem;
     margin: .25rem;
@@ -245,6 +254,7 @@ form > h1{
 #disabled-text-comments-box{
     background-color: white;
 }
+
 div[post-container] > div[id^=post-]{
     flex-grow: 0;
     flex-shrink: 1;
@@ -275,6 +285,7 @@ div[id^=message-]{
     text-align: end;
     justify-self: end;
 }
+
 .comment-text{
     grid-area: comment;
     overflow: hidden;
@@ -282,6 +293,7 @@ div[id^=message-]{
     max-height: 50px;
     min-height: 50px;
 }
+
 #comments-box, #disabled-comments-box{
     padding: .2rem;
     display: flex;
@@ -289,9 +301,11 @@ div[id^=message-]{
     border-radius: .35rem;
     border: 1px solid white;
 }
+
 #disabled-comments-box{
     color: white
 }
+
 #messages{
     grid-area: messages;
     overflow-y: auto;
@@ -302,9 +316,6 @@ div[id^=message-]{
     scroll-behavior: smooth;
     max-height: 690px;
 
-}
-#welcome{
-    opacity: 100;
 }
 
 @media only screen and (max-width: 1199px) {
