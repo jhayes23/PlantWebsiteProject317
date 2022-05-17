@@ -1,25 +1,32 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav-bar">
-    <a class="navbar-brand" href="/"><img src="../../public/plant.png" alt="Home"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" id="navbar-brand" href="/"><img src="../../public/plant.png" alt="Home">
+        Home
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav mr-auto ">
+            <form class="form-inline">
+                <input class="form-control " id="search-text" type="search" placeholder="Search">
+                <span class="material-icons search mr-sm-4 " id="search-button">search</span>
+            </form>
+    {{#if logged}}
+            <span class="nav-item nav-link" id="welcome">Welcome Back, {{username}}! </span>
+    {{/if}}
+        </div>
 
         <div class="navbar-nav">
-            <label>
-                <input class="form-control mr-sm-4" id="search-text" type="search" placeholder="Search">
-            </label>
+                <a class="nav-item nav-link" href="/post">Post</a>
+                {{#if logged}}
+                    <a id="logout-button" class="nav-item nav-link">Log Out</a>
+                {{else}}
+                    <a class="nav-item nav-link " href="/login">Login</a>
+                {{/if}}
+            </div>
 
-            <span class="material-icons search" id="search-button">search</span>
-            <a class="nav-item nav-link" href="/post">Post</a>
 
-            {{#if logged}}
-                <a id="logout-button" class="nav-item nav-link">Log Out</a>
-
-            {{else}}
-                <a class="nav-item nav-link" href="/login">Login</a>
-            {{/if}}
-
-        </div>
     </div>
 </nav>
