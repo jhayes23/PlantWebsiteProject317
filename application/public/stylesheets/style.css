@@ -18,7 +18,7 @@ body {
 }
 
 a {
-    color: #1ca3ec;
+    color: blue;
     font-size: 16px;
 }
 
@@ -291,6 +291,7 @@ div[id^=message-]{
     grid-area: author;
     color: mediumaquamarine;
 }
+
 .date-posted{
     grid-area: created;
     text-align: end;
