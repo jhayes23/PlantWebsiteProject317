@@ -2,13 +2,12 @@
     <div id="photo-container">
         <h2 id="title"> {{currentPost.title}}</h2>
         <div id="post-info">
-            <p id="author">Posted By: {{currentPost.username}}</p>
+            <p id="author">Posted By: <span class="author-text">{{currentPost.username}}</span></p>
             <p>Created: <span id="post-date">{{currentPost.createdAt}} </span></p>
         </div>
 
         <img class="img-fluid" id="post-img" src="/{{currentPost.photopath}}" alt="Missing Image">
         <div id="post-description">
-
             <p id="post-description">Description: {{currentPost.description}}</p>
         </div>
 
